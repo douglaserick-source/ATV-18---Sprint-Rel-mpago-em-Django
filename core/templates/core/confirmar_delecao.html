@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Exclusão</title>
+</head>
+<body>
+    <h1>Tem certeza que deseja excluir o projeto "{{ projeto.nome }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+        <a href="{% url 'listar_projetos' %}">Cancelar</a>
+    </form>
+</body>
+</html>
