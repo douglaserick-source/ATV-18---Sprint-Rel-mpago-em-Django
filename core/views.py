@@ -26,18 +26,18 @@ def editar_projeto(request, pk):
             return redirect('listar_projetos')
     else:
         form = ProjetoForm(instance=projeto)
-    return render(request, 'frequencia/form_projeto.html', {'form': form, 'titulo': 'Editar Projeto'})
+    return render(request, 'core/form_projeto.html', {'form': form, 'titulo': 'Editar Projeto'})
 
 def deletar_projeto(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
     if request.method == 'POST':
         projeto.delete()
         return redirect('listar_projetos')
-    return render(request, 'frequencia/confirmar_delecao.html', {'projeto': projeto})
+    return render(request, 'core/confirmar_delecao.html', {'projeto': projeto})
 
 def listar_tarefas(request):
     tarefas = Tarefa.objects.all()
-    return render(request, 'frequencia/listar_tarefas.html', {'tarefas': tarefas})
+    return render(request, 'core/listar_tarefas.html', {'tarefas': tarefas})
 
 def criar_tarefa(request):
     if request.method == 'POST':
@@ -47,7 +47,7 @@ def criar_tarefa(request):
             return redirect('listar_tarefas')
     else:
         form = TarefaForm()
-    return render(request, 'frequencia/form_tarefa.html', {'form': form, 'titulo': 'Nova Tarefa'})
+    return render(request, 'core/form_tarefa.html', {'form': form, 'titulo': 'Nova Tarefa'})
 
 def editar_tarefa(request, pk):
     tarefa = get_object_or_404(Tarefa, pk=pk)
@@ -58,11 +58,11 @@ def editar_tarefa(request, pk):
             return redirect('listar_tarefas')
     else:
         form = TarefaForm(instance=tarefa)
-    return render(request, 'frequencia/form_tarefa.html', {'form': form, 'titulo': 'Editar Tarefa'})
+    return render(request, 'core/form_tarefa.html', {'form': form, 'titulo': 'Editar Tarefa'})
 
 def deletar_tarefa(request, pk):
     tarefa = get_object_or_404(Tarefa, pk=pk)
     if request.method == 'POST':
         tarefa.delete()
         return redirect('listar_tarefas')
-    return render(request, 'frequencia/confirmar_delecao_tarefa.html', {'tarefa': tarefa})
+    return render(request, 'core/confirmar_delecao_tarefa.html', {'tarefa': tarefa})

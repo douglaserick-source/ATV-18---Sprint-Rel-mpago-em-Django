@@ -9,7 +9,7 @@
     <a href="{% url 'criar_projeto' %}">Criar Novo Projeto</a>
     <hr>
     <ul>
-        {% for projetos in projeto %}
+        {% for projeto in projetos %}
             <li>
                 <strong>{{ projeto.nome }}</strong> - {{ projeto.data_inicio }}
                 <p>{{ projeto.descricao }}</p>
