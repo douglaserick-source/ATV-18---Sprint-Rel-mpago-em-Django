@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Projeto
-from .forms import ProjetoForm
+from .models import Projeto, Tarefa
+from .forms import ProjetoForm, TarefaForm
 
 def listar_projetos(request):
     projetos = Projeto.objects.all()
@@ -34,3 +34,35 @@ def deletar_projeto(request, pk):
         projeto.delete()
         return redirect('listar_projetos')
     return render(request, 'frequencia/confirmar_delecao.html', {'projeto': projeto})
+
+def listar_tarefas(request):
+    tarefas = Tarefa.objects.all()
+    return render(request, 'frequencia/listar_tarefas.html', {'tarefas': tarefas})
+
+def criar_tarefa(request):
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_tarefas')
+    else:
+        form = TarefaForm()
+    return render(request, 'frequencia/form_tarefa.html', {'form': form, 'titulo': 'Nova Tarefa'})
+
+def editar_tarefa(request, pk):
+    tarefa = get_object_or_404(Tarefa, pk=pk)
+    if request.method == 'POST':
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_tarefas')
+    else:
+        form = TarefaForm(instance=tarefa)
+    return render(request, 'frequencia/form_tarefa.html', {'form': form, 'titulo': 'Editar Tarefa'})
+
+def deletar_tarefa(request, pk):
+    tarefa = get_object_or_404(Tarefa, pk=pk)
+    if request.method == 'POST':
+        tarefa.delete()
+        return redirect('listar_tarefas')
+    return render(request, 'frequencia/confirmar_delecao_tarefa.html', {'tarefa': tarefa})
