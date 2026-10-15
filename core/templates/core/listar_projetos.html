@@ -13,7 +13,7 @@
             <li>
                 <strong>{{ projeto.nome }}</strong> - {{ projeto.data_inicio }}
                 <p>{{ projeto.descricao }}</p>
-                <a href="{% url 'editar_projeto' projeto.id %}">Editar</a> | 
+                <a href="{% url 'editar_projeto' projeto.id %}">Editar</a> |
                 <a href="{% url 'deletar_projeto' projeto.id %}">Excluir</a>
             </li>
         {% empty %}
